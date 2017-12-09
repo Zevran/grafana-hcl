@@ -9,8 +9,23 @@ func TestDataSourceConfigParsing(t *testing.T) {
 	expected := &Config{
 		DataSources: []DataSourceConfig{
 			DataSourceConfig{
-				Name: "prometheus",
-				Type: "prometheus",
+				Name:      "prometheus",
+				Type:      "prometheus",
+				Access:    "proxy",
+				URL:       "http://mydatasource.com",
+				Database:  "ohmytsdb",
+				User:      "johndoe",
+				Password:  "cookieisstrong",
+				IsDefault: true,
+				BasicAuth: DataSourceBasicAuthConfig{
+					User:     "johndoe",
+					Password: "cookieisstrong",
+				},
+				JSONData: `{
+    "authType": "keys",
+    "defaultRegion": "us-west-1"
+}
+`,
 			},
 		},
 	}
@@ -26,5 +41,23 @@ func TestDataSourceConfigParsing(t *testing.T) {
 }
 
 const testDataSource = `data_source "prometheus" {
-    type = "prometheus"
+	type = "prometheus"
+	access = "proxy",
+	url = "http://mydatasource.com"
+    database = "ohmytsdb"
+    user = "johndoe"
+	password = "cookieisstrong"
+    is_default = true
+
+    basic_auth {
+        user = "johndoe",
+        password = "cookieisstrong"
+    }
+
+    json_data = <<EOF
+{
+    "authType": "keys",
+    "defaultRegion": "us-west-1"
+}
+EOF
 }`
