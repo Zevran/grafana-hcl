@@ -37,12 +37,12 @@ func (c *GenerateCommand) Run(args []string) int {
 	}
 
 	for index := 0; index < len(conf.DataSources); index++ {
-		jsonContent, err := conf.DataSources[index].GenerateJSON()
+		content, err := hcl.Output(&conf.DataSources[index])
 		if err != nil {
 			c.Ui.Error(err.Error())
 		}
 
-		fmt.Println(string(jsonContent))
+		fmt.Println(string(content))
 	}
 
 	return 0
