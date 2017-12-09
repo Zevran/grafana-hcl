@@ -24,7 +24,7 @@ const (
 )
 
 var (
-	ErrDataSourceNotFound      = errors.New("Data source not found")
+	ErrDataSourceNotFound      = errors.New("Data source type not found")
 	ErrDataSourceAccessInvalid = errors.New("Data source access invalid")
 )
 
