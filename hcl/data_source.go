@@ -25,6 +25,10 @@ type DataSourceBasicAuthConfig struct {
 	Password string `hcl:"password"`
 }
 
+func (d *DataSourceConfig) ValidateHCL() error {
+	return nil
+}
+
 func (d *DataSourceConfig) GenerateJSON() ([]byte, error) {
 
 	ds := &grafana.Datasource{
