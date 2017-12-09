@@ -2,7 +2,9 @@ package commands
 
 import (
 	"fmt"
+	"io/ioutil"
 
+	"github.com/Zevran/grafana-hcl/hcl"
 	"github.com/mitchellh/cli"
 )
 
@@ -11,8 +13,38 @@ type GenerateCommand struct {
 }
 
 func (c *GenerateCommand) Run(args []string) int {
-	c.Ui.Output("Plop")
-	c.Ui.Output(fmt.Sprintf("%+v", args))
+	fileName := args[0]
+
+	wdPath, err := Getwd()
+	if err != nil {
+		c.Ui.Error(err.Error())
+		return 1
+	}
+
+	c.Ui.Info(fmt.Sprintf("Generating JSON from %s\n", fileName))
+
+	filePath := fmt.Sprintf("%s/%s", wdPath, fileName)
+	dat, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		c.Ui.Error(err.Error())
+		return 1
+	}
+
+	conf, err := hcl.ParseConfig(string(dat))
+	if err != nil {
+		c.Ui.Error(err.Error())
+		return 1
+	}
+
+	for index := 0; index < len(conf.DataSources); index++ {
+		jsonContent, err := conf.DataSources[index].GenerateJSON()
+		if err != nil {
+			c.Ui.Error(err.Error())
+		}
+
+		fmt.Println(string(jsonContent))
+	}
+
 	return 0
 }
 

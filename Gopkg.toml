@@ -36,3 +36,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/mitchellh/cli"
+
+[[constraint]]
+  name = "github.com/grafana-tools/sdk"
+  version = "0.7.0"

@@ -14,6 +14,24 @@
   version = "v0.1.0"
 
 [[projects]]
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
+  version = "v1.1.0"
+
+[[projects]]
+  name = "github.com/gosimple/slug"
+  packages = ["."]
+  revision = "e9f42fa127660e552d0ad2b589868d403a9be7c6"
+  version = "v1.1.1"
+
+[[projects]]
+  name = "github.com/grafana-tools/sdk"
+  packages = ["."]
+  revision = "aa7d8fca42f8635700aa78843a3aafdf97e1e3c0"
+  version = "v0.7"
+
+[[projects]]
   branch = "master"
   name = "github.com/hashicorp/errwrap"
   packages = ["."]
@@ -51,6 +69,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/rainycape/unidecode"
+  packages = ["."]
+  revision = "cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
   revision = "b8f5ef32195cae6470b728e8ca677f0dbed1a004"
@@ -58,6 +82,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9662546c15b2d1aa7d814abdafca38a3b2863f9d5db0d6a0870565093c2d758a"
+  inputs-digest = "0e97f09a2049b0eeda4aab39ade53a87453d6630f62fa2ef6f5b75fabfb40cb4"
   solver-name = "gps-cdcl"
   solver-version = 1
