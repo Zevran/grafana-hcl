@@ -38,6 +38,14 @@ func TestDataSourceConfigParsing(t *testing.T) {
 	if !reflect.DeepEqual(config, expected) {
 		t.Error("Data Source structure differed from expectation")
 	}
+
+	for index := 0; index < len(config.DataSources); index++ {
+		err = Validate(&config.DataSources[index])
+		if err != nil {
+			t.Error(err)
+		}
+
+	}
 }
 
 const testDataSource = `data_source "prometheus" {
