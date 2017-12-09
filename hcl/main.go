@@ -36,6 +36,6 @@ func Output(r Resource) (string, error) {
 	return string(jsonContent), err
 }
 
-func Validate(r Resource) {
-
+func Validate(r Resource) error {
+	return r.ValidateHCL()
 }

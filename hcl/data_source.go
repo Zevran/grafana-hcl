@@ -2,8 +2,30 @@ package hcl
 
 import (
 	"encoding/json"
+	"errors"
 
 	grafana "github.com/grafana-tools/sdk"
+)
+
+const (
+	DataSourceGraphite   = "graphite"
+	DataSourceInfluxDB   = "influxdb"
+	DataSourceInfluxDB08 = "influxdb_08"
+	DataSourceElastic    = "elasticsearch"
+	DataSourceOpenTSDB   = "opentsdb"
+	DataSourceCloudWatch = "cloudwatch"
+	DataSourceKairosDB   = "kairosdb"
+	DataSourcePrometheus = "prometheus"
+	DataSourcePostgres   = "postgres"
+	DataSourceMySQL      = "mysql"
+
+	DataSourceAccessDirect = "direct"
+	DataSourceAccessProxy  = "proxy"
+)
+
+var (
+	ErrDataSourceNotFound      = errors.New("Data source not found")
+	ErrDataSourceAccessInvalid = errors.New("Data source access invalid")
 )
 
 type DataSourceConfig struct {
@@ -26,7 +48,33 @@ type DataSourceBasicAuthConfig struct {
 }
 
 func (d *DataSourceConfig) ValidateHCL() error {
-	return nil
+	var err error
+
+	switch d.Type {
+	case DataSourceGraphite:
+	case DataSourceInfluxDB:
+	case DataSourceInfluxDB08:
+	case DataSourceElastic:
+	case DataSourceOpenTSDB:
+	case DataSourceCloudWatch:
+	case DataSourceKairosDB:
+	case DataSourcePrometheus:
+	case DataSourcePostgres:
+	case DataSourceMySQL:
+		err = nil
+	default:
+		err = ErrDataSourceNotFound
+	}
+
+	switch d.Access {
+	case DataSourceAccessDirect:
+	case DataSourceAccessProxy:
+		err = nil
+	default:
+		err = ErrDataSourceAccessInvalid
+	}
+
+	return err
 }
 
 func (d *DataSourceConfig) GenerateJSON() ([]byte, error) {
