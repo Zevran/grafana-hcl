@@ -9,7 +9,7 @@ type RowConfig struct {
 	ShowTitle bool    `hcl:"show_title"`
 	Collapse  bool    `hcl:"collapse"`
 	Editable  bool    `hcl:"editable"`
-	Height    int32   `hcl:"height"`
+	Height    int     `hcl:"height"`
 	Panels    []Panel `hcl:"panels"`
 }
 

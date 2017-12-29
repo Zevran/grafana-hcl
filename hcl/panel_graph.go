@@ -51,26 +51,26 @@ type LegendGraphPanelConfig struct {
 }
 
 type SeriesOverrideGraphPanelConfig struct {
-	Alias         string            `hcl:"alias"`
-	Bars          *bool             `hcl:"bars"`
-	Color         *string           `hcl:"color"`
-	Fill          *int              `hcl:"fill"`
-	FillBelowTo   *string           `hcl:"fill_below_to"`
-	Legend        *bool             `hcl:"legend"`
-	Lines         *bool             `hcl:"lines"`
-	Stack         *BoolStringConfig `hcl:"stack"`
-	Transform     *string           `hcl:"transform"`
-	YAxis         *int              `hcl:"y_axis"`
-	ZIndex        *int              `hcl:"z_index"`
-	NullPointMode *string           `hcl:"null_point_mode"`
+	Alias         string           `hcl:"alias"`
+	Bars          bool             `hcl:"bars"`
+	Color         string           `hcl:"color"`
+	Fill          int              `hcl:"fill"`
+	FillBelowTo   string           `hcl:"fill_below_to"`
+	Legend        bool             `hcl:"legend"`
+	Lines         bool             `hcl:"lines"`
+	Stack         BoolStringConfig `hcl:"stack"`
+	Transform     string           `hcl:"transform"`
+	YAxis         int              `hcl:"y_axis"`
+	ZIndex        int              `hcl:"z_index"`
+	NullPointMode string           `hcl:"null_point_mode"`
 }
 
 type AxisGraphPanelConfig struct {
-	Format  string           `hcl:"format"`
-	LogBase int              `hcl:"logBase"`
-	Max     *IntStringConfig `hcl:"max"`
-	Min     *IntStringConfig `hcl:"min"`
-	Show    bool             `hcl:"show"`
+	Format  string          `hcl:"format"`
+	LogBase int             `hcl:"logBase"`
+	Max     IntStringConfig `hcl:"max"`
+	Min     IntStringConfig `hcl:"min"`
+	Show    bool            `hcl:"show"`
 }
 
 func (g *GraphPanelConfig) ValidateHCL() error {
@@ -110,20 +110,20 @@ func (g *GraphPanelConfig) GenerateJSON() ([]byte, error) {
 	for index := 0; index < len(g.SeriesOverrides); index++ {
 		seriesOveride := grafana.SeriesOverride{
 			Alias:       g.SeriesOverrides[index].Alias,
-			Bars:        g.SeriesOverrides[index].Bars,
-			Color:       g.SeriesOverrides[index].Color,
-			Fill:        g.SeriesOverrides[index].Fill,
-			FillBelowTo: g.SeriesOverrides[index].FillBelowTo,
-			Legend:      g.SeriesOverrides[index].Legend,
-			Lines:       g.SeriesOverrides[index].Lines,
+			Bars:        &g.SeriesOverrides[index].Bars,
+			Color:       &g.SeriesOverrides[index].Color,
+			Fill:        &g.SeriesOverrides[index].Fill,
+			FillBelowTo: &g.SeriesOverrides[index].FillBelowTo,
+			Legend:      &g.SeriesOverrides[index].Legend,
+			Lines:       &g.SeriesOverrides[index].Lines,
 			Stack: &grafana.BoolString{
 				Flag:  g.SeriesOverrides[index].Stack.Flag,
 				Value: g.SeriesOverrides[index].Stack.Value,
 			},
-			Transform:     g.SeriesOverrides[index].Transform,
-			YAxis:         g.SeriesOverrides[index].YAxis,
-			ZIndex:        g.SeriesOverrides[index].ZIndex,
-			NullPointMode: g.SeriesOverrides[index].NullPointMode,
+			Transform:     &g.SeriesOverrides[index].Transform,
+			YAxis:         &g.SeriesOverrides[index].YAxis,
+			ZIndex:        &g.SeriesOverrides[index].ZIndex,
+			NullPointMode: &g.SeriesOverrides[index].NullPointMode,
 		}
 
 		seriesOverrides = append(seriesOverrides, seriesOveride)
