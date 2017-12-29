@@ -9,7 +9,7 @@ import (
 func TestGraphPanelConfigParsing(t *testing.T) {
 
 	expected := &Config{
-		GraphPanel: []GraphPanelConfig{
+		GraphPanels: []GraphPanelConfig{
 			GraphPanelConfig{
 				Name: "node_cpu",
 				Bars: false,
@@ -42,8 +42,8 @@ func TestGraphPanelConfigParsing(t *testing.T) {
 		fmt.Printf("%v\n", expected)
 	}
 
-	for index := 0; index < len(config.GraphPanel); index++ {
-		err = Validate(&config.GraphPanel[index])
+	for index := 0; index < len(config.GraphPanels); index++ {
+		err = Validate(&config.GraphPanels[index])
 		if err != nil {
 			t.Error(err)
 		}
