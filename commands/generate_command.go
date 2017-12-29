@@ -46,12 +46,29 @@ func (c *GenerateCommand) Run(args []string) int {
 
 	}
 
+	for index := 0; index < len(conf.GraphPanels); index++ {
+		err := hcl.Validate(&conf.GraphPanels[index])
+		if err != nil {
+			hasError = true
+			c.Ui.Error(err.Error())
+		}
+
+	}
+
 	if hasError {
 		return 1
 	}
 
 	for index := 0; index < len(conf.DataSources); index++ {
 		content, err := hcl.Output(&conf.DataSources[index])
+		if err != nil {
+			c.Ui.Error(err.Error())
+		}
+
+		fmt.Println(string(content))
+	}
+	for index := 0; index < len(conf.GraphPanels); index++ {
+		content, err := hcl.Output(&conf.GraphPanels[index])
 		if err != nil {
 			c.Ui.Error(err.Error())
 		}

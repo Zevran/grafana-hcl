@@ -12,7 +12,7 @@ type Resource interface {
 
 type Config struct {
 	DataSources []DataSourceConfig `hcl:"data_source"`
-	GraphPanel  []GraphPanelConfig `hcl:"graph_panel"`
+	GraphPanels []GraphPanelConfig `hcl:"graph_panel"`
 }
 
 func ParseConfig(hclText string) (*Config, error) {
